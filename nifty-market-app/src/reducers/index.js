@@ -25,7 +25,8 @@ const initialState = {
 		{name: 'name', description: 'description', img: 'src', id: 14},
 		{name: 'name', description: 'description', img: 'src', id: 15}, 
 		{name: 'name', description: 'description', img: 'src', id: 16}, 
-		{name: 'name', description: 'description', img: 'src', id: 17}, ],
+		{name: 'name', description: 'description', img: 'src', id: 17}, 
+	],
   mtgCards: [],
   ygoCards: [],
   pokeCards: [],
@@ -34,7 +35,8 @@ const initialState = {
   updatingItem: false,
   deletingItem: false,
   errorStatusCode: null,
-  error: '',
+  token: localStorage.getItem('token'),
+  error: ''
 };
 
 const reducer = (state = initialState, action) => {
