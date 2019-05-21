@@ -32,14 +32,14 @@ class NavBar extends React.Component {
 
 	render() {
 		return(
-			<div>
+			<div className="nav-bar">
         <Navbar color="dark" dark expand="md">
           <NavbarBrand href="/">Nifty Market</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/">Log In/Register</NavLink>
+                <NavLink href="/LoginPage">Log In/Register</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>

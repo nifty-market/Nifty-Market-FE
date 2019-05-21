@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import NavBar from './components/NavBar.js'
 import ItemsList from './components/ItemsList.js'
+import LoginPage from './components/LoginPage.js'
 
 import './App.css';
 
@@ -10,7 +11,8 @@ function App() {
     <Router>
       <div className="App">
         <Route path="/" component={NavBar} />
-        <Route path="/" component={ItemsList} />
+        <Route path="/LoginPage" component={LoginPage} />
+        <Route path="/Market" component={ItemsList} />
       </div>
     </Router>
   );

@@ -6,7 +6,7 @@ import { Card, CardImg, CardText, CardBody,
 class ItemsList extends React.Component {
 	render() {
 		return(
-			<div>
+			<div className="items-list">
 				<h2 className="title" >Title</h2>
 				<div className="cards-container" >
 					{this.props.items.map( item => { 
