@@ -30,7 +30,7 @@ class LoginPage extends React.Component {
 	login = e => { 
 		e.preventDefault();
 		this.props.login(this.state.creds)
-		// .then(() => this.props.history.push('/Market'));
+		.then(() => this.props.history.push('/Dashboard'));
 		// this.props.history.push('/Market')
 	}
 
