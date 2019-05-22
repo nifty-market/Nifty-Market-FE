@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -20,41 +21,58 @@ class NavBar extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      // loggedIn: false
     };
   }
 
   toggle() {
     this.setState({
+    	...this.state,
       isOpen: !this.state.isOpen
     });
+  }
+
+  preventDefault = e => {
+  	e.preventDefault();
   }
 
 	render() {
 		return(
 			<div className="nav-bar">
-        <Navbar color="dark" dark expand="md">
+        <Navbar dark expand="md">
           <NavbarBrand href="/">Nifty Market</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+            	<NavItem>
+                <NavLink href='/market'>Market</NavLink>
+              </NavItem>
+              {!this.props.loggedIn && 
               <NavItem>
                 <NavLink href="/LoginPage">Log In/Register</NavLink>
-              </NavItem>
+              </NavItem>}
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Options
-                </DropdownToggle>
+                {this.props.loggedIn && 
+                <DropdownToggle nav>
+                	<div>
+                  	<i className="fas fa-user-astronaut fa-2x" />
+                  	<span className="welcome-msg" >Welcome, User</span>
+                  </div>
+                </DropdownToggle>}
                 <DropdownMenu right>
                   <DropdownItem>
-                    Option 1
+                    My Items
                   </DropdownItem>
                   <DropdownItem>
-                    Option 2
+                    Wishlist
                   </DropdownItem>
-                  <DropdownItem divider />
                   <DropdownItem>
-                    Reset
+                    Transaction History
+                  </DropdownItem>
+                  <DropdownItem divider /> 
+                  <DropdownItem >
+                    Logout
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
@@ -66,4 +84,8 @@ class NavBar extends React.Component {
 	}
 }
 
-export default NavBar;
+const mapStateToProps = ({ loggedIn }) => ({
+	loggedIn
+});
+
+export default connect(mapStateToProps, {})(NavBar);
