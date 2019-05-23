@@ -2,21 +2,24 @@ import {
   LOGIN_START,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT,
   FETCH_DATA_START,
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE,
+  ADD_USER_DATA,
 } from '../actions';
 
 const initialState = {
+  username: '',
+  userItems: [],
+  wishlist: [],
+  transactions: [],
 	items: [],
-  cards: [],
-  ygoCards: [],
-  pokeCards: [],
   loggingIn: false,
   fetchingItems: false,
   updatingItem: false,
   deletingItem: false,
-  loggedIn: false,
+  loggedIn: localStorage.getItem('token'),
   errorStatusCode: null,
   token: localStorage.getItem('token'),
   error: ''
@@ -42,6 +45,12 @@ const reducer = (state = initialState, action) => {
         loggingIn: false,
         error: action.error
       };
+    case LOGOUT:
+      return {
+        ...state,
+        loggedIn: false,
+        token: ''
+      };
     case FETCH_DATA_START:
       return {
         ...state,
@@ -53,6 +62,14 @@ const reducer = (state = initialState, action) => {
         error: '',
         fetchingItems: false,
         items: [...action.payload.cards,...action.payload.videogames]
+      };
+    case ADD_USER_DATA:
+      return {
+        ...state,
+        username: action.payload.username,
+        userItems: [...action.payload.cards,...action.payload.videogames],
+        wishlist: [...action.payload.wishlist.products],
+        transactions: action.payload.transactions
       };
     default:
       return state;

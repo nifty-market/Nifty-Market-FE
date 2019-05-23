@@ -1,14 +1,18 @@
 import React from 'react';
+import Wishlist from './dashboard-components/Wishlist.js';
+import MyItems from './dashboard-components/MyItems.js';
 import Transactions from './dashboard-components/Transactions.js'
 
 class Dashboard extends React.Component {
 	render() {
 		return(
 			<div className="dashboard-page">
-				<h2 className="dashboard-title">Dashboard</h2>
+				<h2 className="title">Dashboard</h2>
 				<div className="dashboard">
-					<h3>My Items</h3>
-					<h3>Wishlist</h3>
+					<h4>Wishlist</h4>
+					<Wishlist />
+					<h4>My Items</h4>
+					<MyItems />
 					<Transactions />
 				</div>
 			</div>
@@ -17,3 +21,4 @@ class Dashboard extends React.Component {
 }
 
 export default Dashboard;
+
