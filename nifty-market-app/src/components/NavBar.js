@@ -12,7 +12,10 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem 
+} from 'reactstrap';
+
+import { logout } from '../actions'
 
 
 class NavBar extends React.Component {
@@ -33,8 +36,9 @@ class NavBar extends React.Component {
     });
   }
 
-  preventDefault = e => {
+  logout = e => {
   	e.preventDefault();
+  	this.props.logout()
   }
 
 	render() {
@@ -46,18 +50,24 @@ class NavBar extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
             	<NavItem>
-                <NavLink href='/market'>Market</NavLink>
+                <Link className='nav-link' to='/Market' >Market</Link>
               </NavItem>
+
+              {this.props.loggedIn && 
+              <NavItem>
+                <Link className='nav-link' to='/Dashboard' >Dashboard</Link>
+              </NavItem>}
+              
               {!this.props.loggedIn && 
               <NavItem>
-                <NavLink href="/LoginPage">Log In/Register</NavLink>
+                <Link className='nav-link' to='/LoginPage' >Log In/Register</Link>
               </NavItem>}
               <UncontrolledDropdown nav inNavbar>
                 {this.props.loggedIn && 
                 <DropdownToggle nav>
                 	<div>
-                  	<i className="fas fa-user-astronaut fa-2x" />
                   	<span className="welcome-msg" >Welcome, User</span>
+                  	<i className="fas fa-user-astronaut fa-2x" />
                   </div>
                 </DropdownToggle>}
                 <DropdownMenu right>
@@ -71,7 +81,7 @@ class NavBar extends React.Component {
                     Transaction History
                   </DropdownItem>
                   <DropdownItem divider /> 
-                  <DropdownItem >
+                  <DropdownItem onClick={this.logout} >
                     Logout
                   </DropdownItem>
                 </DropdownMenu>
@@ -88,4 +98,4 @@ const mapStateToProps = ({ loggedIn }) => ({
 	loggedIn
 });
 
-export default connect(mapStateToProps, {})(NavBar);
+export default connect(mapStateToProps, { logout })(NavBar);
