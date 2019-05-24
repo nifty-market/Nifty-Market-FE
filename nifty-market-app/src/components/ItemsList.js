@@ -19,11 +19,58 @@ class ItemsList extends React.Component {
 		super();
 
 		this.state = {
-			selectedCategory: '',
+			selectedCategory: 'all',
+			selectedSubCategory: 'all',
+			filteredItems: []
 		}
 	}
 
+	componentDidMount() {
+		this.setState({
+			...this.state,
+			filteredItems: this.props.items,
+		})
+	}
+
+	changeCategory = e => {
+		// console.log(this.props.items);
+		let newCategory = e.target.value.toLowerCase().replace(/[s ]/g, '');
+
+		console.log(newCategory);
+
+		let filtered = 
+		this.state.selectedCategory !== 'all' ? 
+		( this.props.items.filter(item => String(item.category) === String(newCategory)) ) : 
+		( this.props.items )
+
+		console.log("filtered:"+filtered);
+		this.setState({
+			...this.state,
+			selectedCategory: newCategory,
+			filteredItems: filtered
+		})
+	}
+
+	changeSubCategory = e => {
+		let newSubCategory = e.target.value.toLowerCase().replace(' ', '');
+
+		console.log(newSubCategory);
+
+		let filtered = 
+		this.state.selectedCategory === 'al' ?
+		(this.props.items) :
+		(this.props.items.filter(item => String(item.subcategory) === String(newSubCategory))) 
+
+		console.log("filtered:"+ filtered);
+		this.setState({
+			...this.state,
+			selectedSubCategory: newSubCategory,
+			filteredItems: filtered
+		})
+	}
+
 	render() {
+		console.log(this.props.items)		
 		return(
 			<div className="items-list" >
 				<h2 className="title" >Market</h2>
@@ -31,17 +78,40 @@ class ItemsList extends React.Component {
 				//Filters
 				<Form className="filters" inline>
 	        <FormGroup>
-	          <Label className='label' for="exampleSelect">{`Category:   `}</Label>
-	          <Input type="select" name="select" id="exampleSelect">
+	          <Label className='label' for="exampleSelect">{'Category:'}</Label>
+	          <Input onChange={this.changeCategory} type="select" name="select" id="exampleSelect">
+	            <option>All</option>
 	            <option>Cards</option>
+	            <option>Game Items</option>
 	            <option>Video Games</option>
 	          </Input>
+	          
+	          {this.state.selectedCategory !== 'all' && <Label className='label' for="exampleSelect">{'Sub-Category:'}</Label>}
+	          {this.state.selectedCategory==='card' && <Input onChange={this.changeSubCategory} type="select" name="select" id="exampleSelect">
+	            <option>All</option>
+	            <option>Magic</option>
+	            <option>YuGiOh</option>
+	            <option>Pokemon</option>
+	          </Input>}
+	          {this.state.selectedCategory==='gameitem' && <Input onChange={this.changeSubCategory} type="select" name="select" id="exampleSelect">
+	            <option>All</option>
+	            <option>Runscape</option>
+	            <option>Guild Wars 2</option>
+	            <option>Diablo III</option>
+	          </Input>}
+	          {this.state.selectedCategory==='videogame' && <Input onChange={this.changeSubCategory} type="select" name="select" id="exampleSelect">
+	            <option>All</option>
+	            <option>First Person Shooter</option>
+	            <option>RPG</option>
+	            <option>Fighting</option>
+	            <option>Adventure</option>
+	          </Input>}
 	        </FormGroup>
 	      </Form>
 
 	      //Item display
 				<div className="cards-container" >
-					{this.props.items.map( item => { 
+					{this.state.filteredItems.map( item => { 
 
 						//Card
 						return <Card className="text-center" key={item.id} >

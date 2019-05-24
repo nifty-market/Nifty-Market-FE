@@ -27,10 +27,9 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <Route path="/" component={NavBar} />
-          <Route exact path="/" component={MainPage} />
+          <Route exact path="/" component={LoginPage} />
           <Route exact path="/Market" component={ItemsList} />
           <Route exact path="/Market/:id" component={ItemPage} />
-          <Route exact path="/LoginPage" component={LoginPage} />
           <PrivateRoute exact path="/Dashboard" component={Dashboard} />
         </div>
       </Router>

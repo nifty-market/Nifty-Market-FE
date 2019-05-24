@@ -13,7 +13,9 @@ import {
 class Wishlist extends React.Component {
 	render() {
 		return(
-			<div className="cards-container" >
+			<div className="dash-section">
+				<h4>Wishlist</h4>
+				<div className="cards-container" >
 					{this.props.wishlist.map( item => { 
 						return <Card className="text-center" key={item.id} >
 			        <CardBody>
@@ -29,6 +31,7 @@ class Wishlist extends React.Component {
 			      </Card>
 					})}
 				</div>
+			</div>
 		);
 	}
 }

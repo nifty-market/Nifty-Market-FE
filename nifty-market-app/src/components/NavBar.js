@@ -60,25 +60,21 @@ class NavBar extends React.Component {
               
               {!this.props.loggedIn && 
               <NavItem>
-                <Link className='nav-link' to='/LoginPage' >Log In/Register</Link>
+                <Link className='nav-link' to='/' >Log In/Register</Link>
               </NavItem>}
               <UncontrolledDropdown nav inNavbar>
                 {this.props.loggedIn && 
                 <DropdownToggle nav>
                 	<div>
-                  	<span className="welcome-msg" >Welcome, User</span>
+                  	<span className="welcome-msg" >Welcome, {
+                  		this.props.username.charAt(0).toUpperCase() + this.props.username.slice(1)
+                  	}</span>
                   	<i className="fas fa-user-astronaut fa-2x" />
                   </div>
                 </DropdownToggle>}
                 <DropdownMenu right>
                   <DropdownItem>
-                    My Items
-                  </DropdownItem>
-                  <DropdownItem>
-                    Wishlist
-                  </DropdownItem>
-                  <DropdownItem>
-                    Transaction History
+                    
                   </DropdownItem>
                   <DropdownItem divider /> 
                   <DropdownItem onClick={this.logout} >
@@ -94,8 +90,9 @@ class NavBar extends React.Component {
 	}
 }
 
-const mapStateToProps = ({ loggedIn }) => ({
-	loggedIn
+const mapStateToProps = ({ loggedIn, username }) => ({
+	loggedIn,
+	username
 });
 
 export default connect(mapStateToProps, { logout })(NavBar);

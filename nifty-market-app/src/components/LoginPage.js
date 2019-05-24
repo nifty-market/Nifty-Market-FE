@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from 'react-loader-spinner';
 import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
@@ -45,15 +46,22 @@ class LoginPage extends React.Component {
 	        <FormGroup>
 	          <Input type="password" name="password" value={this.state.password} onChange={this.handleChange} id="examplePassword" placeholder="Password" />
 	        </FormGroup>
-	        <Button>Login</Button>
+	        <Button>
+	        	{this.props.loggingIn 
+	        		? (<Loader type="ThreeDots" color="white" height="12" width="26" />)
+            	: ('Login')
+            }
+          </Button>
+	        {this.props.error && <p>{this.props.error}</p>}
         </Form>
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = ({  }) => ({
-	
+const mapStateToProps = ({ error, loggingIn }) => ({
+	error,
+	loggingIn
 });
 
 export default connect(mapStateToProps, { login })(LoginPage);
