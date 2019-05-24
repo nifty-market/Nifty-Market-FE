@@ -6,7 +6,7 @@ import { Table } from 'reactstrap';
 class Transactions extends React.Component {
 	render() {
 		return(
-			<div className="transactions" >
+			<div className="transactions dash-section" >
 				<h4>Transactions</h4>
 				<Table dark>
 	        <thead>

@@ -30,7 +30,8 @@ const reducer = (state = initialState, action) => {
     case LOGIN_START:
       return {
         ...state,
-        loggingIn: true
+        loggingIn: true,
+        error: ''
       };
     case LOGIN_SUCCESS:
       return {
@@ -43,7 +44,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loggingIn: false,
-        error: action.error
+        error: action.payload.error_description
       };
     case LOGOUT:
       return {
@@ -61,7 +62,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         error: '',
         fetchingItems: false,
-        items: [...action.payload.cards,...action.payload.videogames]
+        items: [...action.payload.cards,...action.payload.videogames,...action.payload.gameitems]
       };
     case ADD_USER_DATA:
       return {

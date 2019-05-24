@@ -9,9 +9,7 @@ class Dashboard extends React.Component {
 			<div className="dashboard-page">
 				<h2 className="title">Dashboard</h2>
 				<div className="dashboard">
-					<h4>Wishlist</h4>
 					<Wishlist />
-					<h4>My Items</h4>
 					<MyItems />
 					<Transactions />
 				</div>
