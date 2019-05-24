@@ -74,28 +74,47 @@ export const getData = () => dispatch => {
 };
 
 export const newCard = card => {
-	fetch("https://java-nifty.herokuapp.com/post/card", {
+	fetch("https://java-nifty.herokuapp.com/playingcards/post/card", {
+	  mode: 'cors',
 	  method: "POST",
-	  body: card
+	  body: {"name": "testCard",
+		 "description": "Test test",
+		 "imgUrl": "https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=438775&type=card",
+		 "price": 8888,
+		 "category": "card",
+		 "subcategory": "magic"
+		},
+	  headers: {
+	     Authorization: `Bearer ${localStorage.getItem('token')}`,
+	  },
 	}).then(res => res.json()).then(data => console.log(data)).catch(console.log);
 }
 
 export const updateCard = (cardid, params) => {
 	fetch(`https://java-nifty.herokuapp.com/playingcards/update/${cardid}`, {
 	  method: "PUT",
-	  body: params
+	  body: params,
+	  headers: {
+	     Authorization: `Bearer ${localStorage.getItem('token')}`,
+	  },
 	}).then(res => res.json()).then(data => console.log(data)).catch(console.log);
 }
 
 export const deleteCard = cardid => {
 	fetch(`https://java-nifty.herokuapp.com/playingcards/delete/card/${cardid}`, {
-	  method: "DELETE"
+	  method: "DELETE",
+	  headers: {
+	     Authorization: `Bearer ${localStorage.getItem('token')}`,
+	  },
 	}).then(res => res.json()).then(data => console.log(data)).catch(console.log);
 }
 
 export const newTransaction = newTrans => {
 	fetch("https://java-nifty.herokuapp.com/transactions/new", {
 		method: "POST",
-		body: newTrans
+		body: newTrans,
+		headers: {
+	     Authorization: `Bearer ${localStorage.getItem('token')}`,
+	  },
 }).then(res => res.json()).then(data => console.log(data)).catch(console.log);
 }
